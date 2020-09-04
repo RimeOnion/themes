@@ -1,0 +1,20 @@
+# encoding: utf-8
+---
+recipe:
+  Rx: apply
+  args:
+    - frontend
+    - theme
+  description: >-
+    Customize weasel/squirrel to use specific themes.
+
+install_files: >-
+  # rime.theme.yaml
+
+patch_files:
+  ${frontend:-_}.custom.yaml:
+    - patch/+:
+        preset_color_schemes/${theme:-_}:
+          __include: rime.theme:/color_scheme_${theme:-_}
+        style/+:
+          __include: rime.theme:/style_override_${frontend}
